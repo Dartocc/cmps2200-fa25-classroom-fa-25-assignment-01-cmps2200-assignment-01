@@ -5,13 +5,27 @@ See assignment-01.pdf for details.
 # no imports needed.
 
 def foo(x):
-    ### TODO
-    pass
+    if x <= 1:              # base case
+        return x
+    else:                   # recursive case
+        ra = foo(x - 1)
+        rb = foo(x - 2)
+        return ra + rb
+
 
 def longest_run(mylist, key):
-    ### TODO
-    pass
+    longest = 0      # keeps track of longest streak so far
+    current = 0      # keeps track of current streak
 
+    for value in myarray:
+        if value == key:
+            current += 1
+            if current > longest:
+                longest = current
+        else:
+            current = 0   # reset streak when value is not key
+
+    return longest
 
 class Result:
     """ done """
