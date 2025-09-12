@@ -14,18 +14,15 @@ def foo(x):
 
 
 def longest_run(mylist, key):
-    longest = 0      # keeps track of longest streak so far
-    current = 0      # keeps track of current streak
-
-    for value in myarray:
-        if value == key:
-            current += 1
-            if current > longest:
-                longest = current
+    counter = 0
+    maxcount = 0
+    for i in mylist:
+        if i == key:
+            counter += 1
+            maxcount = max(maxcount, counter)
         else:
-            current = 0   # reset streak when value is not key
-
-    return longest
+            counter = 0
+    return maxcount
 
 class Result:
     """ done """
@@ -51,8 +48,39 @@ def to_value(v):
         return int(v)
         
 def longest_run_recursive(mylist, key):
-    ### TODO
-    pass
+    # Base cases: If the list is empty or if it only has one item in it, check if the item is what we need
+    if len(mylist) == 0:
+        return Result(0, 0, 0, False)
+    elif len(mylist) == 1:
+        if mylist[0] == key:
+            return Result(1, 1, 1, True)
+        else:
+            return Result(0, 0, 0, False)
+    
+    mid = len(mylist) // 2
+    left_result = longest_run_recursive(mylist[:mid], key)
+    right_result = longest_run_recursive(mylist[mid:], key)
+    
+    # Determine if entire range matches key
+    is_entire = left_result.is_entire_range and right_result.is_entire_range
+    
+    # Left size
+    left_size = left_result.left_size
+    if left_result.is_entire_range:
+        left_size += right_result.left_size
+    
+    # Right size
+    right_size = right_result.right_size
+    if right_result.is_entire_range:
+        right_size += left_result.right_size
+    
+    # Longest size across middle
+    longest_size = max(left_result.longest_size, 
+                       right_result.longest_size,
+                       left_result.right_size + right_result.left_size)
+    
+    return Result(left_size, right_size, longest_size, is_entire)
+
 
 
 
