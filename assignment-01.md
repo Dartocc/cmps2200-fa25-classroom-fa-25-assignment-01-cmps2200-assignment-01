@@ -21,7 +21,8 @@ No, 2^n is not asymptotically dominant over 2^(2^n) because the limit method yie
 No. A polynomial like n^1.01 always grows faster than a logarithm, so it cannot be bounded above.
 
   - 1d. Is $n^{1.01} \in \Omega(\mathrm{log}^2 n)$?  
-Yes, log^2(n) is asymptotically dominated by n^1.01 as the limit method results in 0.
+Yes. A logarithm grows much slower than any polynomial. Therefore, n^1.01 ∈ Ω(logn)
+
   
   - 1e. Is $\sqrt{n} \in O((\mathrm{log} n)^3)$?  
 No, as the use of the limit method achieves a value of 0 which means log(n)^3 is being asymptotically dominated.
